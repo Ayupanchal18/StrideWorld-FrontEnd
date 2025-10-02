@@ -8,8 +8,11 @@ import toast from "react-hot-toast";
 import Layout from "./../components/Layout/Layout";
 import { AiOutlineReload } from "react-icons/ai";
 import "../styles/Homepage.css";
+import API from "../config/axiosConfig";
 
 const HomePage = () => {
+
+
   const navigate = useNavigate();
   const [cart, setCart] = useCart();
   const [products, setProducts] = useState([]);
@@ -20,10 +23,11 @@ const HomePage = () => {
   const [page, setPage] = useState(1);
   const [loading, setLoading] = useState(false);
 
+
   //get all cat
   const getAllCategory = async () => {
     try {
-      const { data } = await axios.get("/api/v1/category/get-category");
+      const { data } = await API.get(`/api/v1/category/get-category`);
       if (data?.success) {
         setCategories(data?.category);
       }
@@ -40,7 +44,7 @@ const HomePage = () => {
   const getAllProducts = useCallback(async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      const { data } = await API.get(`/api/v1/product/product-list/${page}`);
       setLoading(false);
       setProducts(data.products);
     } catch (error) {
@@ -58,7 +62,7 @@ const HomePage = () => {
   //getTOtal COunt
   const getTotal = async () => {
     try {
-      const { data } = await axios.get("/api/v1/product/product-count");
+      const { data } = await API.get("/api/v1/product/product-count");
       setTotal(data?.total);
     } catch (error) {
       console.log(error);
@@ -70,7 +74,7 @@ const HomePage = () => {
   const loadMore = useCallback(async () => {
     try {
       setLoading(true);
-      const { data } = await axios.get(`/api/v1/product/product-list/${page}`);
+      const { data } = await API.get(`/api/v1/product/product-list/${page}`);
       setLoading(false);
       setProducts((prevProducts) => [...prevProducts, ...data?.products]);
     } catch (error) {
@@ -99,7 +103,7 @@ const HomePage = () => {
 
   const filterProduct = useCallback(async () => {
     try {
-      const { data } = await axios.post("/api/v1/product/product-filters", {
+      const { data } = await API.post("/api/v1/product/product-filters", {
         checked,
         radio,
       });

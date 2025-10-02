@@ -5,6 +5,9 @@ import { useNavigate } from "react-router-dom";
 import toast from "react-hot-toast";
 import "../../styles/RegisterTemplate.css"
 import "../../styles/AuthStyles.css"
+import API from "../../config/axiosConfig";
+
+
 
 
 const Register = () => {
@@ -26,7 +29,7 @@ const Register = () => {
       return;
     }
     try {
-      const res = await axios.post("/api/v1/auth/register", {
+      const res = await API.post("/api/v1/auth/register", {
         name,
         email,
         password,

@@ -3,6 +3,9 @@ import styled from 'styled-components';
 import { useSearch } from "../../context/search";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import API from "../../config/axiosConfig";
+
+
 
 // ✅ Move styled-components outside
 const StyledWrapper = styled.div`
@@ -69,7 +72,7 @@ const SearchInput = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const { data } = await axios.get(
+            const { data } = await API.get(
                 `/api/v1/product/search/${values.keyword}`
             );
             setValues((prev) => ({ ...prev, results: data }));
