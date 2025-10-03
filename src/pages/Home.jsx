@@ -208,7 +208,7 @@ const HomePage = () => {
                     {/* Product Image */}
                     <div className="product-image-container">
                       <img
-                        src={`/api/v1/product/product-photo/${p._id}`}
+                        src={`${process.env.REACT_APP_API_BASE_URL}/api/v1/product/product-photo/${p._id}`}
                         className="card-img-top product-image"
                         alt={p.name}
                       />
